@@ -1,7 +1,7 @@
 import './Login.css';
 import { GoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
-import axios from 'axios';
+import axios from './axios';
 import { useNavigate } from "react-router-dom"
 
 function Login() {
@@ -13,7 +13,7 @@ function Login() {
     );
 
     const handleLogin = async (googleData) => {
-        axios.post('http://localhost:3000/api/google-login', {
+        axios.post('/api/google-login', {
 
             token: googleData
         },

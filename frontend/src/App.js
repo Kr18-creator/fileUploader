@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "./axios";
 import { useNavigate } from 'react-router-dom';
 
 const UploadS3 = () => {
@@ -35,7 +35,7 @@ const UploadS3 = () => {
     formData.append('file', file);
     formData.append('filename', file.name)
     setLoading(true)
-    axios.post('http://localhost:3000/upload', formData, { headers: { Authorization: `Bearer ${loginData.token}` } }).then(data => {
+    axios.post('/upload', formData, { headers: { Authorization: `Bearer ${loginData.token}` } }).then(data => {
       console.log('data',data)
       setLoading(false)
       if (data.data === 'success') {
@@ -53,7 +53,7 @@ const UploadS3 = () => {
 
   const getFiles = (tokenData) => {
     const token = tokenData ? tokenData.token : loginData.token
-    axios.get('http://localhost:3000/getFiles', { headers: { Authorization: `Bearer ${token}` } }).then(data => {
+    axios.get('/getFiles', { headers: { Authorization: `Bearer ${token}` } }).then(data => {
       setAllfiles(data.data.Contents || [])
     }).catch(err => {
       console.log('err', err)
@@ -70,7 +70,7 @@ const UploadS3 = () => {
   }
 
   const downloadFile = (Key) => {
-    axios.get(`http://localhost:3000/downloadFile/${Key}`, { headers: { Authorization: `Bearer ${loginData.token}` } }).then(data => {
+    axios.get(`/downloadFile/${Key}`, { headers: { Authorization: `Bearer ${loginData.token}` } }).then(data => {
       downloadBlob(data.data, Key)
     }).catch(err => {
       console.log('err', err)
