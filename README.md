@@ -9,4 +9,4 @@ for backend
 2. npm start
 
 if frontend Server is other than 3001 then change it in cors policy of backend;
-if backend is other than 3000 then change it in axios calls;
+if backend is other than 3000 then change it in axios file baseurl
